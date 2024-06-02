@@ -1,0 +1,35 @@
+<!-- add product component -->
+
+<div class="container mt-4">
+  <h2>{{ isEditMode ? 'Edit' : 'Add' }} Product</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="productImage">Product Image</label>
+      <input type="file" class="form-control" id="productImage" (change)="onFileChange($event)">
+      <div *ngIf="imagePreview" class="mt-2">
+        <img [src]="imagePreview" alt="Image Preview" class="img-thumbnail" width="200">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="productName">Product Name</label>
+      <input type="text" class="form-control" id="productName" placeholder="Enter Product Name"
+        [(ngModel)]="productName" name="productName" required>
+    </div>
+    <div class="form-group">
+      <label for="productDescription">Product Description</label>
+      <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter Product Description"
+        [(ngModel)]="productDescription" name="productDescription" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="productPrice">Price</label>
+      <input type="text" class="form-control" id="productPrice" placeholder="Enter Price" [(ngModel)]="productPrice"
+        name="productPrice" required>
+    </div>
+    <div class="form-group">
+      <label for="stockQuantity">Stock Quantity</label>
+      <input type="text" class="form-control" id="stockQuantity" placeholder="Enter Quantity"
+        [(ngModel)]="stockQuantity" name="stockQuantity" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>

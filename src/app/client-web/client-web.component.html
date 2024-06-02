@@ -1,0 +1,71 @@
+<!-- Client -web page
+view all product and buy product -->
+
+<div class="container mt-4">
+  <h2>All Products</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let product of products">
+      <div class="card mb-4">
+        <img class="card-img-top" [src]="product.imageUrl" alt="Product Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text">Price: {{ product.productPrice }}</p>
+          <p class="card-text">Stock Quantity: {{ getAvailableStock(product) }}</p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary m-2" (click)="viewProduct(product)">View</button>
+        <button class="btn btn-success m-2" (click)="openBuyModal(buyModal, product)">Buy</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- buy product modal
+    for adding product and quantity to the cart -->
+  <ng-template #buyModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-basic-title">Buy Product</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body" *ngIf="selectedProduct">
+      <img [src]="selectedProduct.imageUrl" alt="Product Image" class="img-thumbnail mb-3" style="max-width: 100px;">
+      <h5>{{ selectedProduct.productName }}</h5>
+      <p>Price: {{ selectedProduct.productPrice }}</p>
+      <div class="mb-3">
+        <label for="orderQuantity" class="form-label">Order Quantity</label>
+        <input type="number" class="form-control" id="orderQuantity" [(ngModel)]="orderQuantity" min="1">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="confirmBuy(modal)">Confirm</button>
+    </div>
+  </ng-template>
+
+  <!-- product cart -->
+  <div *ngIf="cart.length > 0" class="cart-icon">
+    <button class="btn btn-warning" (click)="openCheckoutModal(checkoutModal)">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="badge bg-danger">{{ cart.length }}</span>
+    </button>
+  </div>
+
+  <!-- Checkout modal
+for place order -->
+  <ng-template #checkoutModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-basic-title">Checkout</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div *ngFor="let item of cart">
+        <p>{{ item.productId }} - Quantity: {{ item.orderQuantity }}</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('cancel')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="placeOrder(modal)">Place Order</button>
+    </div>
+  </ng-template>
+</div>

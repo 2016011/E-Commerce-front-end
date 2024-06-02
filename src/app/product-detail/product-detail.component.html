@@ -1,0 +1,12 @@
+<!-- View product page -->
+<div class="container mt-4" *ngIf="product">
+    <div class="card">
+      <img class="card-img-top product-image" [src]="product.imageUrl" alt="Product Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.productName }}</h5>
+        <p class="card-text">Description: {{ product.productDescription }}</p>
+        <p class="card-text">Price: {{ product.productPrice }}</p>
+        <p class="card-text">Stock Quantity: {{ product.stockQuantity }}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<!-- Display products with table -->
+
+<div class="container product-table mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-primary" (click)="addProduct()">Add Product</button>
+    <h2>Product List</h2>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ProductId</th>
+        <th>ProductName</th>
+        <th>ProductDescription</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.productId }}</td>
+        <td>{{ product.productName }}</td>
+        <td>{{ product.productDescription }}</td>
+        <td>{{ product.productPrice }}</td>
+        <td>
+          <button class="btn btn-link" (click)="editProduct(product)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-link text-danger" (click)="deleteProduct(product.productId)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
